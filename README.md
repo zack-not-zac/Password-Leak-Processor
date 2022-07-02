@@ -5,7 +5,7 @@ Takes the format username:password, 1 line per user/pass combination. This is th
 
 Intended for use by security analysts to detect any credentials for their organisation, with password obfuscation options for support tickets.
 
-# Usage
+## Usage
 
 ``` bash
 python pw_leak_processor.py [file path]
