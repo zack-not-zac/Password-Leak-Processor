@@ -44,7 +44,7 @@ def main():
     else:
         file=open_file(str(argv[1]))
     
-    kw = input("Enter a string to search for: ")
+    kw = input("Enter a domain (or part of a domain such as a company name) to search for: ")
     data=convert_file_to_set(file)
 
     obfuscate_pw = input("Obfuscate passwords? (Y/N) ").upper()
