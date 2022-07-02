@@ -10,7 +10,7 @@ def open_file(path):
         print("Unable to open file: " + str(e))
         exit()
 
-    print("File opened at " + path + " successfully"
+    print("File opened at " + path + " successfully")
     return f
 
 def get_matches(keyword,data,obfuscate="Y"):
