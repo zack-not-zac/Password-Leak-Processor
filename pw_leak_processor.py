@@ -5,21 +5,21 @@ from sys import argv
 
 def open_file(path):
     try:
-        f = open(path,"rt")
+        f = open(path,"rt")     # Attempts to open file as read only text, prints error if it cannot.
     except Exception as e:
         print("Unable to open file: " + str(e))
         exit()
     return f
 
 def get_matches(keyword,data,obfuscate="Y"):
-    query="^[\w\-\.]*@" + keyword + "[\w\-]*\.\w*\:.*$"
+    query="^[\w\-\.]*@" + keyword + "[\w\-]*\.\w*\:.*$"     # Query for regex emails followed by a pass, i.e test@domain.com:pass, where "domain" is the keyword
     matches=set()
     for line in data:
         result=re.search(query,line)
         try:
             s = result.string
             if obfuscate=="Y":
-                s = re.sub("(?<=\:\w).*(?=\w)","********",s)
+                s = re.sub("(?<=\:\w).*(?=\w)","********",s)    # Obfuscates the passwords printed, for use in support tickets.
             
             matches.add(s)
         except AttributeError:
