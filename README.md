@@ -7,6 +7,13 @@ Intended for use by security analysts to detect any credentials for their organi
 
 ## Usage
 
+- To open the script
+
 ``` bash
 python pw_leak_processor.py [file path]
 ```
+
+- Keyword should be a part of a domain, or whole domain excluding told.
+    - For example, if searching testdomain[.]com, the keyword would be "testdomain"
+
+- Choose if you want to obfuscate password (replace every character except start & end with asterisks (*)
