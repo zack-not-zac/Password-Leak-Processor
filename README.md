@@ -4,3 +4,9 @@ A simple Python script to detect emails for a given domain in a password leak fi
 Takes the format username:password, 1 line per user/pass combination. This is the standard setup for most password leak files.
 
 Intended for use by security analysts to detect any credentials for their organisation, with password obfuscation options for support tickets.
+
+# Usage
+
+``` bash
+python pw_leak_processor.py [file path]
+```
