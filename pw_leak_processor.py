@@ -9,6 +9,8 @@ def open_file(path):
     except Exception as e:
         print("Unable to open file: " + str(e))
         exit()
+
+    print("File opened at " + path + " successfully"
     return f
 
 def get_matches(keyword,data,obfuscate="Y"):
