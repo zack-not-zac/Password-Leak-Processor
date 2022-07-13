@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import re
 from sys import argv
 
@@ -14,7 +13,7 @@ def open_file(path):
     return f
 
 def get_matches(keyword,data,obfuscate="Y"):
-    query="^[\w\-\.]*@" + keyword + "[\w\-]*\.\w*\:.*$"     # Query for regex emails followed by a pass, i.e test@domain.com:pass, where "domain" is the keyword
+    query="^[\w\-\.]*@("+keyword+"|[\w\.]+"+keyword+")[\w\-]*\.\w*\:.*$"    # Query for regex emails followed by a pass, i.e test@domain.com:pass, where "domain" is the keyword
     matches=set()
     for line in data:
         result=re.search(query,line)
@@ -29,7 +28,6 @@ def get_matches(keyword,data,obfuscate="Y"):
     
     return matches
 
-
 def convert_file_to_set(file):
     s = set()
     for line in file:
@@ -37,16 +35,35 @@ def convert_file_to_set(file):
         s.add(line)
     
     return s
-        
+
+def save_to_file(matches):
+    fn = input("Enter a filename:\n")
+    try:
+        file=open(fn,"w")
+    except:
+        print("Unable to open file to save at "+ fn)
+        print_set(matches)
+    
+    for i in matches:
+        file.write(i+"\n")
+    
+    file.close()
+    return
+
+def print_set(matches):
+    for i in matches:
+        print(i)
+
+    return 
 
 def main():
-    if len(argv) < 2:
-        print("Usage: " + argv[0] + " [file_name]")
+    if len(argv) < 3:
+        print("Usage: " + argv[0] + " [file_name] [keyword]")
         exit()
     else:
         file=open_file(str(argv[1]))
     
-    kw = input("Enter a domain (or part of a domain such as a company name) to search for: ")
+    kw = str(argv[-1])
     data=convert_file_to_set(file)
 
     obfuscate_pw = input("Obfuscate passwords? (Y/N) ").upper()
@@ -54,8 +71,14 @@ def main():
         obfuscate_pw="Y"
     matches=get_matches(kw,data,obfuscate_pw)
 
-    for i in matches:
-        print(i)
+    save=input("Save output to file? (Y/N) ").upper()
+    if save != "Y" and save !="N":
+        save="N"
+
+    if save=="Y":
+        save_to_file(matches)
+    else:
+        print_set(matches)
 
 
 if __name__ == "__main__":
