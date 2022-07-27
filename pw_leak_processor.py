@@ -13,7 +13,7 @@ def open_file(path):
     return f
 
 def get_matches(keyword,data,obfuscate="Y"):
-    query="^[\w\-\.]*@("+keyword+"|[\w\.]+"+keyword+")[\w\-]*\.\w*\:.*$"    # Query for regex emails followed by a pass, i.e test@domain.com:pass, where "domain" is the keyword
+    query="^[\w\-\.]*@("+keyword+"|[\w\.]+"+keyword+")[\w\-]*(\.\w*|\.\w*\.\w*)\:.*$"    # Query for regex emails followed by a pass, i.e test@domain.com:pass, where "domain" is the keyword
     matches=set()
     for line in data:
         result=re.search(query,line)
